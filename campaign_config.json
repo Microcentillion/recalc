@@ -1,0 +1,27 @@
+{
+   "lender_points": 0.03,
+   "lender_rate": 0.12,
+   "hold_time": 3,
+   "refi_points": 0.022,
+   "refi_rate": 0.045,
+   "refi_percentage": 0.75,
+   "maintenance": 0.19,
+   "vacancy": 0.10,
+   "add_expenses": 30,
+   "value_app": 1.03,
+   "rent_app": 1.03,
+   "expense_app": 1.02,
+   "closing_costs": 800,
+   "repairs": 2500,
+   "acquisition_fee": 1500,
+   "my_cash": 0,
+   "partner_cash": 5000,
+   "partner_split": 0.5,
+   
+   "my_min_coc": 0.16,
+   "my_min_ncf": 100,
+   
+   "oc_balloon_year": 10,
+   "upg_balloon_year": 10,
+   "upg_down_payment": 0.1
+}

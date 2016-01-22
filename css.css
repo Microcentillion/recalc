@@ -1,0 +1,171 @@
+table.mailing_table tr td {
+   padding-right: 15px;
+}
+
+span.mi-none {
+   color: black;
+   text-decoration: none;
+}
+
+span.mi-active {
+   color: red;
+   text-decoration: none;
+}
+
+.autocomplete-w1 { position: absolute; top: 0px; left: 0px; }
+.autocomplete_autocomplete { border: 1px solid #999; background: #FFF; cursor: default; text-align: left; max-height: 350px; overflow: auto; /* IE6 specific: */ _height: 350px; _margin: 0; _overflow-x: hidden; }
+    .autocomplete_autocomplete .autocomplete_selected { background: #F0F0F0; }
+    .autocomplete_autocomplete div { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+    .autocomplete_autocomplete strong { font-weight: normal; color: #3399FF; }
+
+#query { font-size: 28px; padding: 10px; border: 1px solid #CCC; display: block; margin: 40px; }
+
+a.img img {
+   height: 25px;
+   width: 25px;
+   position: relative;
+   top: -1px;
+}
+
+dd input {
+   margin-right: 20px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   text-align: right;
+}
+
+dd div {
+   width: 140px;
+   display: inline-block;
+}
+
+dt.minor {
+   font-weight: lighter;
+}
+
+section td {
+   width: 48%;
+   vertical-align: top;
+}
+
+dd span span {
+   width: 60px;
+   text-align: right;
+}
+
+section div.section_header {
+   border: 1px solid gray;
+   margin-bottom: 8px;
+   padding: 10px;
+}
+
+section div.section_footer {
+   border: 1px solid gray;
+   margin-bottom: 8px;
+   padding: 10px;
+}
+
+section div.section_footer table {
+   margin-left: 3%;
+   width: 94%;
+}
+
+section div.section_footer td.narrow {
+   width: 7%;
+}
+
+section div.section_footer td.dollars {
+   width: 10%;
+}
+
+section div.section_footer td.cash {
+   width: 8%;
+}
+
+section div.section_footer td.equity {
+   width: 30%;
+}
+
+section div.section_header input {
+   width: 80px;
+   height: 12px;
+}
+
+dd input {
+   width: 80px;
+   height: 12px !important;
+   font-size: 12px !important;
+}
+
+table.display tbody tr td {
+   font-family: monospace;
+   font-size: 11px;
+   white-space: nowrap;
+   padding: 1px;
+   padding-left: 7px;
+   vertical-align: middle;
+   overflow: hidden;
+}
+
+div.legend {
+   display: inline;
+   position: relative;
+   left: -7px;
+   cursor: pointer;
+   width: 9px; 
+}
+
+.surround {
+   margin-left: 5px;
+}
+
+.surround input {
+   position: relative;
+   top: -3px;
+}
+
+img.shrink {
+   max-width: 200px;
+   max-height: 200px;
+}
+
+div.phantom_container {
+   font-variant: small-caps;
+   background-color: #e0e0e0;
+}
+
+div.phantom_event {
+   border: 1px solid black;
+}
+
+div.phantom_event div {
+   width: 100px;
+   display: inline-block;
+   margin-left: 15px;
+}
+
+div.phantom_event div.params {
+   width: 350px;
+   display: inline-block;
+}
+
+a.priceHistory {
+	cursor: pointer;
+}
+
+div.priceHistory {
+	border: 1px solid black;
+	background-color: #e0e0e0;
+	margin-left: 15px;
+	text-decoration: none;
+	font-variant: small-caps;
+	display: none;
+}
+
+div.row-fluid {
+   width: 100%;
+}
+
+table.rents td {
+   width: 100px;
+}

@@ -1,0 +1,96 @@
+<div id="sidebar" class="sidebar-offcanvas">
+   <h3>Project Tracking</h3>
+   <div class="row-fluid">
+      <div class="col-md-3">
+         Client:
+      </div>
+      <div class="col-md-9">
+         <select id="customer" ng-model="options.customer" ng-change="showProjects()">
+            <option ng-repeat="customer in customers" value="{{ customer }}">{{ customer }}</select>
+         </div>
+      </div>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            Project:
+         </div>
+         <div class="col-md-9">
+            <select id="job" ng-model="options.job" ng-change="getProjectDetails()">
+               <option ng-repeat="(key, value) in jobs" value="{{ key }}">{{ value }}</option>
+            </select>
+         </div>
+      </div>
+      <br>&nbsp;
+      <br>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            CM:
+         </div>
+         <div class="col-md-9">
+            <select id="cm" ng-model="options.client_manager" ng-disabled="!project_loaded">
+               <option ng-repeat="user in engineers" value="{{ user.id }}">{{ user.name }}</option>
+            </select>
+         </div>
+      </div>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            LE:
+         </div>
+         <div class="col-md-9">
+            <select id="cm" ng-model="options.lead_engineer" ng-disabled="!project_loaded">
+               <option ng-repeat="user in engineers" value="{{ user.id }}">{{ user.name }}</option>
+            </select>
+         </div>
+      </div>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            PM:
+         </div>
+         <div class="col-md-9">
+            <select id="cm" ng-model="options.project_manager" ng-disabled="!project_loaded">
+               <option ng-repeat="user in engineers" value="{{ user.id }}">{{ user.name }}</option>
+            </select>
+         </div>
+      </div>
+      <br>&nbsp;
+      <br>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            Fixed Cost:
+         </div>
+         <div class="col-md-9">
+            <input type="text" id="fixed_cost" value="{{ fixed_cost }}" ng-model="options.fixed_cost" ng-disabled="!project_loaded">
+         </div>
+      </div>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            - Sr. Eng:
+         </div>
+         <div class="col-md-9">
+            <input type="text" id="sreng" value="{{ sreng }}" ng-model="options.sreng_rate" ng-disabled="!project_loaded">
+         </div>
+      </div>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            - Eng:
+         </div>
+         <div class="col-md-9">
+            <input type="text" id="eng" value="{{ eng }}" ng-model="options.eng_rate" ng-disabled="!project_loaded">
+         </div>
+      </div>
+      <div class="row-fluid">
+         <div class="col-md-3">
+            - Tech Wr:
+         </div>
+         <div class="col-md-9">
+            <input type="text" id="tw" value="{{ tw }}" ng-model="options.tw_rate" ng-disabled="!project_loaded">
+         </div>
+      </div>
+      <br>&nbsp;
+      <br>
+      <div class="row-fluid">
+         <div class="col-md-12">
+            <button class="btn btn-default" id="save" ng-click="save()">Save</button>
+         </div>
+      </div>
+   </div>
+</div>

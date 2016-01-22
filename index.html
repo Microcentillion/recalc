@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js" lang="en"> <!--<![endif]-->
+   <head>
+      <meta charset="utf-8">
+      <title>Investment Calculator</title>
+       
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta name="apple-mobile-web-app-capable" content="yes" />    
+       <meta name="description" content="">
+       <meta name="author" content="">
+
+       <!-- ===================== js.js ===================== -->
+       <!-- <script type="text/javascript" src="js.js"></script> -->
+
+
+       <!-- ===================== Touch Icons ===================== -->
+       <link rel="shortcut icon" href="favicon.ico">
+       <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144-precomposed.png">
+       <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114-precomposed.png">
+       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72-precomposed.png">
+       <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57-precomposed.png">
+
+       <!-- ===================== CSS ===================== -->    
+       <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>  
+       <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+       <link rel="stylesheet" href="css/bootstrap/bootstrap-responsive.min.css">    
+
+       <!-- Site specific - CSS --> 
+       <link rel="stylesheet" href="css.css">  
+       <link rel="stylesheet" href="css/theme_light/formselements/chosen.css">
+       <link rel="stylesheet" href="css/theme_light/formselements/dropkick.css">
+       <link rel="stylesheet" href="css/theme_light/jquery-ui-1.8.20.custom.css">
+       <link rel="stylesheet" href="css/theme_light/icons/font-awesome.css">
+
+       <!-- Common - CSS -->     
+       <link rel="stylesheet" href="css/theme_light/common.css">  
+       <link rel="stylesheet" href="css/theme_light.css" class="style_set">
+       
+       <!--[if lt IE 9]>
+         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+       <![endif]-->
+
+   </head>
+   <body ng-app="app" ng-controller="angularInvestCtrl">
+      <div id="loader_cont"><img src="img/loaders/page_loader.gif"></div> 
+      <div class="options_cont">
+         <form name="myForm">
+            <a class="options_btn" href="#">OPTIONS</a> 
+            <div class="options group">
+               <div>
+                  <p>Background image:</p>
+                  <ul class="background_list">
+                     <li><a class="current" id='bg_1' href="#">bg_1</a></li>
+                     <li><a id='bg_2' href="#">bg_2</a></li>
+                     <li><a id='bg_3' href="#">bg_3</a></li>
+                     <li><a id='bg_4' href="#">bg_4</a></li>
+                     <li><a id='bg_5' href="#">bg_5</a></li>
+                     <li><a id='bg_6' href="#">bg_6</a></li>
+                     <li><a id='bg_7' href="#">bg_7</a></li>
+                     <li><a id='bg_8' href="#">bg_8</a></li>
+                     <li><a id='bg_9' href="#">bg_9</a></li>
+                     <li><a id='bg_10' href="#">bg_10</a></li>
+                  </ul>
+               </div>
+               <div>
+                  <p>Color styling:</p>
+                  <ul class="color_list">
+                     <li><a class="current" id='c_1' href="#" title="Rose">rose</a></li>
+                     <li><a id='c_2' href="#" title="Orange">orange</a></li>
+                     <li><a id='c_3' href="#" title="Apple Green">apple_green</a></li>
+                     <li><a id='c_4' href="#" title="Sky Blue">sky_blue</a></li>
+                     <li><a id='c_5' href="#" title="Purple">purple</a></li>
+                  </ul>            
+               </div>
+               <div class="top_mn_setup">
+                  <p>Display top menu on:</p>
+                  <div>
+                     <input id="top_menu_click" checked="checked" type="radio" value="1" class="menu_show" name="top_menu_show"><label for="top_menu_click">Click</label>
+                     <input id="top_menu_hover" type="radio" value="0" class="menu_show" name="top_menu_show"><label for="top_menu_hover">Hover</label>
+                  </div>            
+               </div>  
+               <div class="clear_cache_cont">
+                  <a class="btn btn-mini" href="#">Clear Cache</a>
+               </div>
+            </div>
+         </form>
+      </div>   
+      <div class="navbar navbar-fixed-top">
+         <div class="navbar-inner">
+            <div class="container">
+               <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                  <span class="sweet-gray sweet-go-back-from-screen">&nbsp;</span>
+               </a>
+               <h1 class="brand" style="position: relative; left: -50px; text-align: center; line-height: 28px; width: 600px;"></h1>
+            </div>
+         </div>
+      </div>
+            
+      <div class="container">      
+         <div class="main_content row-fluid">
+            <div class="span3" id="floater">
+               <div class="side_nav sidebar-nav" data-spy="affix" data-offset-top="150">
+                  <h3 class="main_menu group">
+                     <span class="title">Main Menu</span>
+                     <a id="nav_list_btn" class="btn-collapse btn btn-inverse">
+                        <span class="sweet-gray sweet-go-back-from-screen">&nbsp;</span>
+                     </a>
+                  </h3>
+                  <p>
+                     <div style="text-align: center; color: white;">
+                        <b>Qaroto Investment Calculator</b>
+                     </div>
+                     <dl style="color: white;">
+                        <dt>Inputs:</dt>
+                        <dd>
+                           Provide the after repair value, annual taxes, and fair market rental rate. Adjust the exit strategy and
+                           other values to determine an offer you can make.
+                        </dd>
+                        <br>
+                        <dt>Investment Pro-Forma:</dt>
+                        <dd>All the hard work is done for you.<br>Easy, huh?</dd>
+                     </dl>
+                  </p>
+               </div><!--/.well -->
+            </div><!--/span-->
+
+            <div class="span9" id="proforma">
+               <div class="row-fluid" id="inputs">
+                  <div class="span12">
+                     <div class="widget">
+                        <header>
+                        <h3>Inputs:
+                           <input type="hidden" id="refresh" value="1">
+                        </h3>
+                        <div class="widget_right" style="position: relative; top: 4px;">
+                           &nbsp;
+                        </div>
+                        <ul class="toggle_content">                           
+                           <li class="arrow"><a href="#">Toggle Content</a></li>
+                       </ul>
+                     </header>
+                     <section class="code_align">
+                        <dt>Strategy</dt>
+                        <dd>
+                           <div class="row-fluid">
+                              <div class="span2">
+                                <input type="radio" ng-change="changeMethod()" ng-model="method" name="method" value="trad">
+                                Traditional
+                              </div>
+
+                              <div class="span2">
+                                <input type="radio" ng-change="changeMethod()" ng-model="method" name="method" value="bfr">
+                                Buy - Fix - Refi
+                              </div>
+
+                              <div class="span2">
+                                <input type="radio" ng-change="changeMethod()" ng-model="method" name="method" value="oc">
+                                Owner Carry
+                              </div>
+                              
+                              <div class="span2">
+                                <input type="radio" ng-change="changeMethod()" ng-model="method" name="method" value="ws">
+                                Wholesale
+                              </div>
+                           
+                              <div class="span4">
+                                <input type="radio" ng-change="changeMethod()" ng-model="method" name="method" value="upg">
+                                UPG
+                              </div>
+                           </div>
+                        </dd>
+                        <br>
+                        <div class="section_header">
+                           <span id="trad_exit" ng-show="method == 'trad'">
+                              <dt>Other fields: Traditional</dt>
+                              <dd>                                 
+                                 <div class="input_label">Balloon Year: </div>
+                                 <input type="text" class="" ng-change="calculate()" ng-model="balloon_year">
+
+                                 <div class="input_label">Partner CoC: </div>
+                                 <input type="text" class="percent" ng-change="calculate()" ng-model="partner_coc_target">
+                              </dd>
+                           </span>
+                           <span id="bfr_exit" ng-show="method == 'bfr'">
+                              <dt>Other fields: Buy - Fix - Refi</dt>
+                              <dd>                                 
+                                 <div class="input_label">Partner CoC: </div>
+                                 <input type="text" class="percent" ng-change="calculate()" ng-model="partner_coc_target">
+
+                                 <div class="input_label">Cash-out Refi: </div>
+                                 <input type="checkbox" class="percent" ng-change="calculate()" ng-model="refi_cash_out">
+                              </dd>
+                           </span>
+                           <span id="oc_exit" ng-show="method == 'oc'">
+                              <dt>Other fields: Owner Carry</dt>
+                              <dd>
+                                  <div class="input_label">Payment to Seller: </div>
+                                  <input type="text" class="dollar" ng-change="calculate()" ng-model="oc_mon_payment">
+                                
+                                   <div class="input_label">Minimum CoC: </div>
+                                   <input type="text" class="percent" ng-change="calculate()" ng-model="my_coc_target">
+                                
+                                   <div class="input_label">Balloon Year: </div>
+                                   <input type="text" class="" ng-change="calculate()" ng-model="balloon_year">
+                              </dd>
+                           </span>
+                           <span id="ws_exit" ng-show="method == 'ws'">
+                              <dt>Other fields: Wholesale</dt>
+                              <dd>
+                                 <div>Buyer CoC Target: </div>
+                                 <input type="text" class="percent" ng-change="calculate()" ng-model="ws_coc_target">
+                              </dd>
+                           </span>
+                           <span id="upg_exit" ng-show="method == 'upg'">
+                              <dt>Other fields: Owner Carry</dt>
+                              <dd>
+                                 <div>Down Payment: </div>
+                                 <input type="text" class="dollar" ng-change="calculate()" ng-model="upg_down_payment">
+                                 
+                                 <div>Payment to Seller: </div>
+                                 <input type="text" class="dollar" ng-change="calculate()" ng-model="upg_mon_payment">
+                                 
+                                 <div>Balloon Year: </div>
+                                 <input type="text" class="" ng-change="calculate()" ng-model="upg_balloon_year">
+                                 
+                                 <br>
+                                 
+                                 <div>Monthly Profit: </div>
+                                 <input type="text" class="dollar" ng-change="calculate()" ng-model="upg_mon_ncf">
+                              </dd>
+                           </span>
+                        </div>
+                        
+                        <dt>Value:</dt>
+                        <dd>
+                           <div>ARV: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="arv">
+                           
+                           <div>Taxes: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="taxes">
+                           
+                           <div>Rental Rate: </div><input type="text" class="dollar" ng-change="calculate()" ng-model="rental_rate">
+                        </dd>
+                        <dd>
+                           <div>Insurance: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="insurance">
+                        </dd>
+                        <dt>Phase I Assumptions:</dt>
+                        <dd>
+                           <div>Hard Money Points: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="lender_points">
+                           
+                           <div>Hard Money Rate: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="lender_rate">
+                           
+                           <div>Hold Time (Months): </div>
+                           <input type="text" ng-change="calculate()" ng-model="hold_time">
+                        </dd>
+                        <dd>
+                           <div>Refi Points: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="refinance_points">
+                           
+                           <div>Refi Rate: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="refinance_rate">
+                           
+                           <div>Refi LTV: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="refinance_percentage">
+                        </dd>
+                        <dd ng-show="method == 'trad'">
+                           <div>Mortgage Insurange:</div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="mortgage_insurance">
+
+                           <div>Insurance LTV: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="mortgage_insurance_ltv">
+                        </dd>
+                        <dt>Phase II Assumptions:</dt>
+                        <dd>
+                           <div>Management: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="management">
+
+                           <div>Maintenance: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="maintenance">
+                           
+                           <div>Repairs: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="repairs">
+                        </dd>
+                        <dd>
+                           <div>Value Appreciation: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="value_appreciation">
+                           
+                           <div>Rent Appreciation: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="rent_appreciation">
+                           
+                           <div>Expense Appreciation: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="expenses_appreciation">
+                        </dd>
+                        <dd>
+                           <div>Vacancy: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="vacancy">
+
+                           <div>Monthly Expenses: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="monthly_expenses">
+                        </dd>
+                        <dt>Inputs:</dt>
+                        <dd>
+                           <div>Closing Costs: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="closing_costs">
+                        </dd>
+                        <dd>
+                           <div>Bid Amount:
+                              <a ng-click="optimize()" style="cursor: pointer;" title="Auto-Optimize">
+                                 <span class="icon-screenshot">&nbsp;</span>
+                              </a>
+                           </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="purchase_price">
+                           
+                           <div>Imm. Repairs: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="imm_repairs">
+                           
+                           <div>Acquisition Fee: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="acquisition_fee">
+                        </dd>
+                        <dd>
+                           <div>My Cash: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="my_cash">
+                           
+                           <div>Partner Cash: </div>
+                           <input type="text" class="dollar" ng-change="calculate()" ng-model="partner_cash">
+                           
+                           <div>Partner Split: </div>
+                           <input type="text" class="percent" ng-change="calculate()" ng-model="partner_split">
+                        </dd>
+                           
+                        <script type="text/javascript">
+                        
+                        /*
+                        setTimeout(function() {
+                           auction_onLoad();                           
+                           switchToBFR();
+                           
+                           calculateScenario();
+                           toggleOfferButton();
+                        }, 500);
+                        */
+                        
+                        </script>
+                     </section>
+                  </div>
+               </div>
+            </div>
+            <div class="row-fluid">
+               <div class="span12">
+            <div class="widget">
+               <header>
+                  <h3>Investment Pro-Forma: </h3>
+                  <div class="widget_right" style="position: relative; top: 4px;">
+                     <span id="grade" style="position: relative; top: -2px; left: 50; color: white;" class="badge badge-success">Status: GOOD</span>
+                     <input type="button" id="print" style="position: relative; top: -4px; left: 50;" value="Print" ng-click="renderPrint()">
+                  </div>
+                  <ul class="toggle_content">                  
+                     <li class="arrow">
+                        <a href="#">Toggle Content</a>
+                     </li>
+                 </ul>
+               </header>
+               <section class="code_align">
+                  <div class="section_header">
+                     <div class="row-fluid">
+                        <div class="span6">
+                           <div>
+                              <h6>Critical Metrics:</h6>
+                              <b>Amount to Borrow:</b>
+                              <span class="dollar">{{ total_to_borrow | currency:"$":0 }}</span>
+                           </div>
+                           <div>
+                              <b>Phase I LTV:</b>
+                              <span class="percent">{{ p1_ltv }}%</span>
+                           </div>
+                           <div>
+                              <b>Profit Taking:</b>
+                              <span>{{ p1_profit_taking | currency:"$":0 }}</span>
+                           </div>
+                           <br>
+                           <div>
+                              <b>Partner CF:</b>
+                              <span class="dollar">{{ partner_cf | currency:"$":0 }}/mo.</span>
+                           </div>
+                           <div>
+                              <b>Partner CoC:</b>
+                              <span class="percent">{{ partner_coc }}%</span>
+                           </div>
+                           <div>
+                              <b>My CoC:</b>
+                              <span class="percent">{{ my_coc }}%</span>
+                           </div>
+                        </div>
+                        <div class="span6">
+                           <h6>Profit Projections:</h6>
+                           <div>
+                              <b>Immediate Equity:</b>
+                              <span class="dollar">{{ imm_equity | currency:"$":0 }}</span>
+                              </div>
+                           <div>
+                              <b>Phase I Profit:</b>
+                              <span class="dollar">
+                                {{ p1_profit | currency:"$":0 }}
+                                <a ng-show="method == 'bfr' && refi_cash_out == true">
+                                  (Cash-out Refi)
+                                </a>
+                                <a ng-show="method == 'bfr' && refi_cash_out == false">
+                                  (Owed-only Refi)
+                                </a>
+                              </span>
+                           </div>
+                           <div>
+                              <b>Phase II CF/yr:</b>
+                              <span class="dollar">{{ ncf_year | currency:"$":0 }}</span>
+                           </div>
+                           <br>
+                           <div>
+                              <b>10 Year Equity Gain:</b>
+                              <span class="dollar">{{ y10_equity | currency:"$":0 }}</span>
+                           </div>
+                           <div>
+                              <b>10 Year Total CF:</b>
+                              <span class="dollar">{{ y10_cf | currency:"$":0 }}</span>
+                           </div>
+                           <div>
+                              <b>10 Year Total Profit:</b>
+                              <span class="dollar">{{ y10_profit | currency:"$":0 }}</span>
+                           </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row-fluid">
+                     <div class="span5">                        
+                           <h4>Phase I</h4>
+                           <dl class="dl-horizontal">
+                              <dt class="minor">Bid Amount</dt>
+                              <dd>
+                                 <span id="purchase_price" class="dollar">{{ purchase_price | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              
+                              <dt class="minor">Imm. Repairs</dt>
+                              <dd>
+                                 <span id="imm_repairs" class="dollar">{{ imm_repairs | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              <div ng-show="method == 'trad' || method == 'bfr' || method == 'upg'">
+                                <dt class="minor">Acquisition Fee</dt>
+                                <dd>
+                                   <span id="acquisition_fee" class="dollar">{{ acquisition_fee | currency:"$":0 }}&nbsp;</span>
+                                </dd>
+                              </div>
+                              <dt class="minor">Closing Costs</dt>
+                              <dd>
+                                 <span id="closing_costs" class="dollar">{{ closing_costs | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              <dt>Total Costs to Buy</dt>
+                              <dd>
+                                 <span id="total_cost_to_buy" class="dollar">{{ total_cost_to_buy | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              <dt class="minor">Cash Available</dt>
+                              <dd>
+                                 <span id="cash_available" class="dollar">{{ cash_available | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              <dt>Funds Needed to Buy</dt>
+                              <dd>
+                                 <span id="cash_needed" class="dollar">{{ cash_needed | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              <dt>&nbsp;</dt>
+                              <dd>&nbsp;</dd>
+                              <div ng-show="method == 'upg' || method == 'bfr' || method == 'ws'">
+                                <dt class="minor">Hard Money Points</dt>
+                                <dd>
+                                   <span id="lender_points" class="percent">{{ lender_points }}%</span>
+                                </dd>
+                                <dt class="minor">Hard Money Rate</dt>
+                                <dd>
+                                   <span id="lender_rate" class="percent">{{ lender_rate }}%</span>
+                                </dd>
+                                <dt class="minor">Effective Cost of Money</dt>
+                                <dd>
+                                   <span id="effective_lender_rate" class="percent">{{ effective_lender_rate }}%</span>
+                                </dd>
+                                <dt class="minor">Roll-in Hard Money Costs</dt>
+                                <dd>
+                                   <span id="lender_costs" class="dollar">{{ lender_costs | currency:"$":0 }}&nbsp;</span>
+                                </dd>
+                              </div>
+                              <div ng-show="method == 'oc' || method == 'trad'">
+                                <dt class="minor">Finance Costs</dt>
+                                <dd>
+                                   <span id="refinance_costs" class="dollar">{{ refinance_costs | currency:"$":0 }}&nbsp;({{ refinance_points }}%)</span>
+                                </dd>
+                              </div>
+                              <dt>Total Loan Amount</dt>
+                              <dd>
+                                 <span id="total_to_borrow" class="dollar">{{ total_to_borrow | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              <dt>&nbsp;</dt>
+                              <dd>&nbsp;</dd>
+                              <dt class="minor">ARV</dt>
+                              <dd>
+                                 <span id="arv" class="dollar">{{ arv | currency:"$":0 }}&nbsp;</span>
+                              </dd>
+                              <div ng-show="method == 'trad'">
+                                <dt>PITIM / Rent</dt>
+                                <dd>
+                                  <span id="piti_rent" class="percent">{{ piti_rent }}%</span> ({{ pitim | currency:"$":0 }})
+                                </dd>
+                              </div>
+                              <dt>Phase 1 LTV</dt>
+                              <dd>
+                                 <span id="p1_ltv" class="percent">{{ p1_ltv }}%</span>
+                              </dd>
+                              <div id="refi_stats" ng-show="method == 'bfr'">
+                                <dt>&nbsp;</dt>
+                                <dd>&nbsp;</dd>
+                                <dt class="minor">Refinance LTV</dt>
+                                <dd>
+                                   <span id="refinance_percentage" class="percent">{{ refinance_percentage }}%</span>
+                                </dd>
+                                <dt class="minor">Refinance Amount</dt>
+                                <dd>
+                                   <span id="refi_amount" class="dollar">{{ refi_amount | currency:"$":0 }}&nbsp;</span>
+                                </dd>
+                                <dt class="minor">Refinance points</dt>
+                                <dd>
+                                   <span id="refi_points">{{ refi_points_dollars | currency:"$":0 }} ({{ refinance_points }}%)</span>
+                                </dd>
+                                <dt>Difference</dt>
+                                <dd>
+                                   <span id="refi_cashout" class="dollar">{{ refi_cashout | currency:"$":0 }}&nbsp;</span>
+                                </dd>
+                              </div>
+                            </dl>
+                        </div>
+                        <div class="span7">
+                           <h4>Phase II</h4>
+                           <dl class="dl-horizontal">
+                              <dt class="minor">Rental Rate</dt>
+                              <dd>
+                                 <span id="rental_rate" class="my">
+                                    <span class="label">{{ rental_rate | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ rental_rate_year | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+                              
+                              <dt class="minor">Insurance</dt>
+                              <dd>
+                                 <span id="rental_rate" class="my">
+                                    <span class="label">{{ insurance_month | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ insurance | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+
+                              <dt class="minor">Repairs</dt>
+                              <dd>
+                                 <span id="maintenance" class="my">
+                                    <span class="label">{{ mt_repairs | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ mt_repairs_year | currency:"$":0 }}</span>
+                                 </span>
+                                 ({{ repairs }}%)
+                              </dd>
+
+                              <dt class="minor">Maintenance</dt>
+                              <dd>
+                                 <span id="maintenance" class="my">
+                                    <span class="label">{{ mt_maintenance | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ mt_maintenance_year | currency:"$":0 }}</span>
+                                 </span>
+                                 ({{ maintenance }}%)
+                              </dd>
+
+                              <dt class="minor">Management</dt>
+                              <dd>
+                                 <span id="management" class="my">
+                                    <span class="label">{{ mt_management | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ mt_management_year | currency:"$":0 }}</span>
+                                 </span>
+                                 ({{ management }}%)
+                              </dd>
+                              
+                              <dt class="minor">Vacancy</dt>
+                              <dd>
+                                 <span id="vacancy" class="my">
+                                    <span class="label">{{ mt_vacancy | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ mt_vacancy_year | currency:"$":0 }}</span>
+                                 </span>
+                                 ({{ vacancy }}%)
+                              </dd>
+                              
+                              <dt class="minor">Taxes</dt>
+                              <dd>
+                                 <span id="taxes" class="my">
+                                    <span class="label">{{ taxes_month | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ taxes | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+                              
+                              <dt class="minor">Other Expenses</dt>
+                              <dd>
+                                 <span id="monthly_expenses" class="my">
+                                    <span class="label">{{ monthly_expenses | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ monthly_expenses_year | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+
+                              <dt>Total Expenses</dt>
+                              <dd>
+                                 <span id="total_expenses" class="my">
+                                    <span class="label">{{ total_expenses | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ total_expenses_year | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+                                 
+                              <dt class="minor">NOI</dt>
+                              <dd>
+                                 <span id="noi" class="my">
+                                    <span class="label">{{ noi | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ noi_year | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+
+                              <dt class="minor">Cap Rate</dt>
+                              <dd>
+                                 <span id="cap_rate" class="percent">{{ cap_rate }}%</span>
+                              </dd>
+                              
+                              <dt>&nbsp;</dt>
+                              <dd>&nbsp;</dd>
+                              
+                              <dt class="minor">Refinance Rate</dt>
+                              <dd>
+                                 <span id="refinance_rate" class="percent">{{ refinance_rate }}%</span>
+                              </dd>
+                              
+                              <dt class="minor">Payment</dt>
+                              <dd>
+                                 <span id="payment" class="my">
+                                    <span class="label">{{ payment | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ payment_year | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+
+                              <div ng-show="method == 'trad'">
+                                <dt class="minor">Mortgage Insurance</dt>
+                                <dd>
+                                   <span id="mortgage_insurance_amount" class="my">
+                                      <span class="label">{{ mortgage_insurance_amount | currency:"$":0 }}</span>
+                                      <span class="label label-inverse">{{ mortgage_insurance_amount_year | currency:"$":0 }}</span>
+                                   </span>
+                                </dd>
+                              </div>
+
+                              <div ng-show="method == 'upg'">
+                                 <dt class="minor">Payment to Owner</dt>
+                                 <dd>
+                                    <span id="upg_mon_payment" class="my">
+                                       <span class="label">{{ upg_mon_payment | currency:"$":0 }}</span>
+                                       <span class="label label-inverse">{{ upg_mon_payment_year | currency:"$":0 }}</span>
+                                    </span>
+                                 </dd>
+                              </div>
+                              
+                              <dt>Net Cash Flow</dt>
+                              <dd>
+                                 <span id="ncf" class="my">
+                                    <span class="label">{{ ncf | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ ncf_year | currency:"$":0 }}</span>
+                                 </span>
+                              </dd>
+                              
+                              <dt>&nbsp;</dt>
+                              <dd>&nbsp;</dd>
+                              
+                              <dt class="minor">Partner Split</dt>
+                              <dd>
+                                 <span id="partner_split" class="percent">{{ partner_split }}%</span>
+                              </dd>
+                              
+                              <dt class="minor">My Cash Flow</dt>
+                              <dd>
+                                 <span id="my_cf" class="my">
+                                    <span class="label">{{ my_cf | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ my_cf_year | currency:"$":0 }}</span>
+                                 </span>
+                                 <span id="my_coc" class="label">{{ my_coc }}%</span>
+                              </dd>
+                              
+                              <dt class="minor">Partner Cash Flow</dt>
+                              <dd>
+                                 <span id="partner_cf" class="my">
+                                    <span class="label">{{ partner_cf | currency:"$":0 }}</span>
+                                    <span class="label label-inverse">{{ partner_cf_year | currency:"$":0 }}</span>
+                                 </span>
+                                 <span id="partner_coc" class="label">{{ partner_coc }}%</span>
+                              </dd>
+                              
+                              <div id="oc_down_content" ng-show="method == 'oc'">
+                                 <dt>&nbsp;</dt>
+                                 <dd>&nbsp;</dd>
+                                 
+                                 <dt class="minor">Down Payment</dt>
+                                 <dd>
+                                    <span>
+                                      <span id="oc_down" class="dollar">{{ oc_down | currency:"$":0 }}</span> ({{ oc_down_percentage }}%)
+                                    </span>
+                                 </dd>
+                              </div>
+                              <div id="oc_cf" ng-show="method == 'oc'">
+                                 <dt class="minor">Cash Flow</dt>
+                                 <dd>
+                                    <span>
+                                      <span id="oc_cf" class="dollar label label-success">{{ oc_cf | currency:"$":0 }}</span>
+                                    </span>
+                                 </dd>
+                              </div>
+                              <div id="oc_balloon" ng-show="method == 'oc' || method == 'trad'">
+                                 <dt class="minor">Balloon</dt>
+                                 <dd>
+                                    <span id="oc_balloon" class="my">
+                                      <span id="balloon_val" class="label">{{ balloon_val | currency:"$":0 }}</span>
+                                      <span id="balloon" class="label label-success">{{ balloon | currency:"$":0 }}</span>
+                                    </span>
+                                    <span id="btv" class="label">{{ btv }}%</span>
+                                 </dd>
+                              </div>
+                              <div id="total" ng-show="method == 'oc'">
+                                 <dt>Total to Seller</dt>
+                                 <dd>
+                                    <span>
+                                      <span id="total" class="dollar label label-success">{{ total_to_seller | currency:"$":0 }}</span>
+                                    </span>
+                                 </dd>
+                              </div>
+                           </dl>
+                        
+                     </div>
+                  </div>
+                  <div class="section_footer">
+                     <h4>Phase 3:</h4>
+                     <table class="rents">
+                        <tr>
+                           <td class="narrow">Year:</td>
+                           <td>Rents:</td>
+                           <td>Expenses:</td>
+                           <td>CF:</td>
+                           <td>Cum. CF:</td>
+                           <td>Earned Eq.</td>
+                           <td>Partner CoC</td>
+                           <td>Partner Profit</td>
+                           <td>Partner ARR</td>
+                        </tr>
+                        <tr ng-repeat="year in years" style="background-color: {{ year.bgcolor }};">
+                           <td><span class="{{ year.miclass }}">{{ year.year }}</span></td>
+                           <td>{{ year.rents | currency:"$":0  }}</td>
+                           <td>{{ year.expenses | currency:"$":0  }}</td>
+                           <td>{{ year.cf | currency:"$":0  }}</td>
+                           <td>{{ year.cumcf | currency:"$":0  }}</td>
+                           <td>{{ year.equity | currency:"$":0  }}</td>
+                           <td>{{ year.partner_coc }}%</td>
+                           <td>{{ year.partner_profit | currency:"$":0  }}</td>
+                           <td>{{ year.partner_roi }}%</td>
+                        </tr>
+                     </table>
+                  </div>
+               </section>
+            </div>
+         </div>
+      </div>
+
+      </div><!--/.fluid-container-->
+      <!-- ===================== JS ===================== -->
+      <script src="js/libs/jquery-1.7.2.min.js"></script>    
+      <script src="js/libs/bootstrap.min.js"></script>   
+      <script src="js/libs/ios-orientationchange-fix.js"></script>          
+      <script src="js/libs/jquery-ui-1.8.20.custom.min.js"></script>
+      <script src="js/plugins/widgets/jquery.sparkline.min.js"></script>
+      <script src="js/common.js"></script>  
+
+      <!-- Site specific --> 
+      <script src="js/plugins/formselements/chosen.jquery.min.js"></script> 
+      <script src="js/plugins/formselements/scrollability.min.js"></script> 
+      <script src="js/plugins/formselements/jquery.dropkick-1.0.0.js"></script> 
+
+      <!-- AngularJS for ...angularity -->
+      <script src="js/angular.min.js"></script>
+      <script src="scripts/app.js"></script>
+      <script src="scripts/controllers/angularInvestCtrl.js"></script>
+
+      <script src="js/script.js"></script>
+      <script src="js/specific/sparks.js"></script>
+      <script src="js/jquery.autocomplete.js"></script>
+      <script type="text/javascript">
+
+         $("a.priceHistory").mouseenter(function() {
+            $("div.priceHistory").slideToggle()
+         }).mouseleave(function() {
+            $("div.priceHistory").slideToggle()
+         });
+
+         $("div.widget_right div.btn").addClass("disabled");
+         
+         $('document').ready(function() {
+            setTimeout(function() {
+               if (typeof $.QueryString['type'] == "string") {
+                  autoFillFromURL();
+               }
+            }, 1000);
+         });
+         
+         $('#mt_upg_mon_payment').parents('div').eq(0).hide()
+         
+      </script>
+   </body>
+</html>
