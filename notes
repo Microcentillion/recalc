@@ -1,0 +1,30 @@
+--- Partnering?: Performing between 1x and 1.33x target
+- Equity multiplied by
+
+
+--- Founded: Minimum performance: 1/3 over target
+
+Owned outright:
+- Straight 90:10 split with corp.
+
+High LTV
+- Attempt to match owner cashflow
+- - If share equity is too low for corp, attempt to buyout owner at 30%
+
+- Corp margin
+Closing costs, acquisition fee*, transactional money costs
+
+Share value
+- Corp margin
+- Mortgage
+---
+Max equity
+
+If (max equity < 0) abort
+
+if (matched performance value < 90% max equity) {
+	Match fully, keep the rest.
+} otherwise {
+	Compensate to 90% max equity value, regardless of return
+	if (compensated return < 0) abort
+}
